@@ -1,0 +1,378 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 198 100% 55%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 198 100% 55%;
+    --radius: 0.5rem;
+    --telegram-theme-bg: 152 24% 65%;
+    --color-telegram-blue: 195 89% 48%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 198 80% 50%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 198 80% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Auth Styles */
+.auth-background {
+  background-color: hsl(var(--telegram-theme-bg));
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 25.5rem;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  background-color: white;
+  border-radius: 0.75rem;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+#auth-qr-form {
+  width: 100%;
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+/* QR Code Styles */
+.qr-outer {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.qr-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.qr-canvas {
+  border-radius: 12px;
+  animation: appear 0.3s ease-out;
+}
+
+.qr-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+}
+
+.qr-plane {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qr-animation {
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(51, 144, 236, 0.2) 0%, transparent 70%),
+    linear-gradient(45deg, transparent 49%, rgba(51, 144, 236, 0.3) 50%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, rgba(51, 144, 236, 0.3) 50%, transparent 51%);
+  animation: pulse 2s infinite;
+  mix-blend-mode: screen;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+
+.qr-animation::before,
+.qr-animation::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #3390EC;
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.qr-animation::before {
+  top: 20%;
+  left: 20%;
+  animation: float 3s infinite ease-in-out;
+}
+
+.qr-animation::after {
+  bottom: 20%;
+  right: 20%;
+  animation: float 3s infinite ease-in-out reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.2); }
+}
+
+.telegram-logo {
+  animation: logo-float 4s infinite ease-in-out;
+  filter: drop-shadow(0 0 8px rgba(51, 144, 236, 0.5));
+}
+
+@keyframes logo-float {
+  0% {
+    transform: translate(-50%, -50%) rotate(-15deg) translateY(0);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(-15px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(15deg) translateY(0);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(15px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-15deg) translateY(0);
+  }
+}
+
+.paper-plane {
+  position: relative;
+  animation: paper-plane-move 2s infinite ease-in-out;
+}
+
+.paper-plane-path {
+  filter: drop-shadow(0 0 4px rgba(51, 144, 236, 0.5));
+}
+
+@keyframes paper-plane-move {
+  0% {
+    transform: translateX(-5px) translateY(-5px);
+  }
+  50% {
+    transform: translateX(5px) translateY(5px);
+  }
+  100% {
+    transform: translateX(-5px) translateY(-5px);
+  }
+}
+
+.auth-form h1 {
+  font-size: 1.375rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  color: #2b3b4b;
+}
+
+.auth-form ol {
+  text-align: left;
+  padding-left: 24px;
+  margin-bottom: 1.5rem;
+}
+
+.auth-form li {
+  margin-bottom: 16px;
+  color: #7c7c7c;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.auth-form li b {
+  color: #2b3b4b;
+  font-weight: 500;
+}
+
+/* Phone Number Auth Styles */
+.phone-auth-container {
+  width: 100%;
+  text-align: center;
+}
+
+.phone-input-container {
+  margin-bottom: 1.5rem;
+}
+
+.phone-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d6d6d6;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.phone-input:focus {
+  border-color: hsl(var(--color-telegram-blue));
+  outline: none;
+}
+
+.auth-next-button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: hsl(var(--color-telegram-blue));
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-next-button:hover {
+  background-color: hsl(var(--color-telegram-blue) / 0.9);
+}
+
+.auth-toggle-button {
+  margin-top: 1.5rem;
+  background: none;
+  border: none;
+  color: hsl(var(--color-telegram-blue));
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.auth-toggle-button:hover {
+  text-decoration: underline;
+}
+
+.phone-icon-container {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background-color: #f5f9fb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Additional styling for notifications and adjustments */
+.notification {
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  background-color: #f1f7ff;
+  color: #2b3b4b;
+}
+
+.opacity-transition {
+  transition: opacity 0.3s ease;
+}
+
+.not-shown {
+  opacity: 0;
+}
+
+.shown {
+  opacity: 1;
+}
+
+.logo-highlight {
+  background: radial-gradient(circle at center, rgba(51, 144, 236, 0.2) 0%, transparent 70%);
+  animation: pulse-highlight 2s infinite ease-in-out;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-highlight {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
