@@ -31,31 +31,24 @@ A modern Telegram web client clone built with Next.js 15, React 18, and Tailwind
 
 ### Installation
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/telegram-clone.git
-cd telegram-clone
-```
-
-2. Install dependencies:
+1. Install dependencies:
 ```bash
 npm install
 # or
 bun install
 ```
 
-3. Set up environment variables:
+2. Set up environment variables:
    - Copy `.env.example` to `.env.local`
    - Fill in the required environment variables
 
-4. Run the development server:
+3. Run the development server:
 ```bash
 npm run dev
 # or
 bun run dev
 ```
 
-The application will be available at [http://localhost:3000](http://localhost:3000).
 
 ## Available Scripts
 
